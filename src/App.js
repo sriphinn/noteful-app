@@ -15,15 +15,18 @@ export default class App extends React.Component {
           <Link to="/"><h1>Noteful</h1></Link>
         </header>
         <main>
-          <Route exact path="/" component={NoteList} />
-          <Route path="/folder/:folderId" component={NoteList} />
-          <Route path="/note/:noteId" component={Note} />
+          <aside className='folder-list-container'>
+            <Route exact path="/" component={FolderList} />
+            <Route path="/folder/:folderId" component={FolderList} />
+            <Route path="/note/:noteId" component={NoteSidebar} />
+          </aside>
+          <section className='note-list-container'>
+            <Route exact path="/" component={NoteList} />
+            <Route path="/folder/:folderId" component={NoteList} />
+            <Route path="/note/:noteId" component={Note} />
+          </section>
         </main>
-        <aside>
-          <Route exact path="/" component={FolderList} />
-          <Route path="/folder/:folderId" component={FolderList} />
-          <Route path="/note/:noteId" component={NoteSidebar} />
-        </aside>
+        
         
       </div>
     );

@@ -1,3 +1,74 @@
-.App {
+/* * {outline: 1px solid pink;} */
+
+/* #88DAFD */
+
+.App {}
+
+header {
   text-align: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.folder-list-container {
+  padding: 0 1em;
+  text-align: center;
+}
+
+.note-list-container {
+  width: 100%;
+  padding: 0 1em;
+}
+
+.folder-list, .note-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.folder-list li {
+  border: 1px solid black;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+
+.note {
+  position: relative;
+  border: 1px solid black;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+.folder-list {
+}
+
+.note-list {}
+
+.note-list li {
+  position: relative;
+}
+
+.note-list h3 {
+  margin-top: 0;
+}
+
+.note button {
+  position: absolute;
+  bottom: 30px;
+  right: 10px;
+}
+
+/* DESKTOP STYLES */
+@media only screen and (min-width: 800px) {
+  main {
+    flex-direction: row;
+  }
+
+  .folder-list-container{
+    width: 300px;
+  }
 }

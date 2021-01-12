@@ -7,9 +7,12 @@ export default function Note(props) {
     )
     console.log(props.match.params.noteId)
     return (
-        <div className="note">
-            <p>{note.modified}</p>
-            <button>Delete Note</button>
+        <div>
+            <div className="note">
+                <h3>{note.name}</h3>
+                <p>{note.modified}</p>
+                <button>Delete Note</button>
+            </div>
             <p>{note.content}</p>
         </div>
     )

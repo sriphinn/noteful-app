@@ -16,7 +16,7 @@ export default function NoteList(props) {
             <p><h2>Note List</h2></p>
             <ul className="note-list">
                 {data.map(note =>
-                    <li key={note.id}>
+                    <li key={note.id} className='note'>
                         <Link to={`/note/${note.id}`}>
                             <h3>{note.name}</h3>
                         </Link>
