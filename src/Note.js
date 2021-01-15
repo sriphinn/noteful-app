@@ -1,17 +1,25 @@
-import React from 'react';
-import dummyStore from './dummy-store';
+import React, {useContext} from 'react';
+import NotefulContext from './NotefulContext';
 
 export default function Note(props) {
-    const note = dummyStore.notes.find(n =>
+    
+    const context = useContext(NotefulContext)
+    const note = context.notes.find(n =>
         n.id === props.match.params.noteId
-    )
+    ) || {}
     console.log(props.match.params.noteId)
+    
+    const onDeleteNote = (e) => {
+        context.deleteNote(note.id)
+        props.history.push("/")
+    }
+
     return (
         <div>
             <div className="note">
                 <h3>{note.name}</h3>
-                <p>{note.modified}</p>
-                <button>Delete Note</button>
+                <p>Date modified: {note.modified}</p>
+                <button onClick={onDeleteNote}>Delete Note</button>
             </div>
             <p>{note.content}</p>
         </div>
