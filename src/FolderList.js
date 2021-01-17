@@ -14,7 +14,11 @@ export default function FolderList() {
                             {folder.name}
                         </Link>
                     </li>)}
-                    <li>Add folder</li>
+                    <li>
+                        <Link to={'/add-folder'}>
+                            <button>Add Folder</button>
+                        </Link> 
+                    </li>
             </ul>
         </div>
     )
