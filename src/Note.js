@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import NotefulContext from './NotefulContext';
+import moment from 'moment';
 
 export default function Note(props) {
     
@@ -18,7 +19,7 @@ export default function Note(props) {
         <div>
             <div className="note">
                 <h3>{note.name}</h3>
-                <p>Date modified: {note.modified}</p>
+                <p>Date modified: {moment(note.modified).format("MMM DD YYYY")}</p>
                 <button onClick={onDeleteNote}>Delete Note</button>
             </div>
             <p>{note.content}</p>

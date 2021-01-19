@@ -6,6 +6,8 @@ import NoteList from './NoteList';
 import Note from './Note';
 import NoteSidebar from './NoteSidebar';
 import NotefulContext from './NotefulContext';
+import AddFolder from './AddFolder';
+import AddNote from './AddNote'
 
 export default class App extends React.Component {
   state = {
@@ -28,6 +30,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    this.getData()
+  }
+
+  getData = () => {
     fetch(`http://localhost:9090/folders`, {
       method: 'GET'
     })
@@ -72,10 +78,12 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('render')
     const contextValue = {
       folders: this.state.folders,
       notes: this.state.notes,
-      deleteNote: this.deleteNote
+      deleteNote: this.deleteNote,
+      getData: this.getData
     }
     return (
       <div className="App">
@@ -88,11 +96,13 @@ export default class App extends React.Component {
               <Route exact path="/" component={FolderList} />
               <Route path="/folder/:folderId" component={FolderList} />
               <Route path="/note/:noteId" component={NoteSidebar} />
+              <Route path="/add-folder" component={AddFolder} />
             </aside>
             <section className='note-list-container'>
               <Route exact path="/" component={NoteList} />
               <Route path="/folder/:folderId" component={NoteList} />
               <Route path="/note/:noteId" component={Note} />
+              <Route path="/add-note" component={AddNote} />
             </section>
           </main>
         </NotefulContext.Provider>

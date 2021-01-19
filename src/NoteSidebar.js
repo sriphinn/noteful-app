@@ -1,14 +1,17 @@
-import React from 'react';
-import dummyStore from './dummy-store';
+import React, {useContext} from 'react';
+import NotefulContext from './NotefulContext';
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function NoteSidebar(props) {
     
-    const note = dummyStore.notes.find(n =>
+    const context = useContext(NotefulContext);
+
+    const note = context.notes.find(n =>
         n.id === props.match.params.noteId
     )
 
-    const folderName = dummyStore.folders.find(f =>
+    const folderName = context.folders.find(f =>
         f.id === note.folderId
     )
 
@@ -26,3 +29,8 @@ export default function NoteSidebar(props) {
         </div>
     )
 }
+
+NoteSidebar.propTypes = {
+    folder: PropTypes.arrayOf(PropTypes.object),
+    notes: PropTypes.arrayOf(PropTypes.object)
+};
