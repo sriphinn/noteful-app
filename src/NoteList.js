@@ -19,7 +19,7 @@ export default function NoteList(props) {
         <div>
             <h2>Note List</h2>
             <ul className="note-list">
-                {data.map(note => <NoteItem note={note}/>)}
+                {data.map((note, id) => <NoteItem note={note} key={id}/>)}
                     <Link to={"/add-note"}>
                         <button className="add-note">
                             Add note
