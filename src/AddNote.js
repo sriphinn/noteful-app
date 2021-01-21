@@ -9,7 +9,8 @@ const Required = () => (
 export default class AddNote extends React.Component {
 
   state = {
-    message: ""
+    message: "",
+    error: null
   }
 
   static contextType = NotefulContext;
@@ -24,14 +25,31 @@ export default class AddNote extends React.Component {
     return name;
   }
 
+  validateContent(content) {
+    if (!content || content.trim() === "") {
+      this.setState({
+        message: <p className="noteError">Content must include text.</p>
+      })
+    return ;
+    } 
+    return content;
+  }
+
   handleNoteSubmit = e => {
     e.preventDefault()
     const {name, folderId, content} = e.target
     const validName = this.validateName(name.value);
+      if (!validName){
+        return
+      }
+    const validContent = this.validateContent(content.value);
+      if (!validContent){
+        return
+    }
     const note = {
       name: validName,
       folderId: folderId.value,
-      content: content.value,
+      content: validContent.value,
       modified: new Date()
     }
     fetch(`http://localhost:9090/notes`, {
@@ -49,6 +67,9 @@ export default class AddNote extends React.Component {
     .then((e) => {
       this.context.getData()
       this.props.history.push('/')
+    })
+    .catch(error => {
+      this.setState({ error })
     })  
   }
 
@@ -76,10 +97,8 @@ export default class AddNote extends React.Component {
                   id='name'
                   placeholder='ex: Meeting Notes'
                   name='name'
-                  required
                 />
                 </p>
-                {this.state.message}
               </div>
               <div>
           </div>
@@ -94,7 +113,6 @@ export default class AddNote extends React.Component {
                     <option key={folder.id} value={folder.id}>
                       {folder.name}
                     </option>)}
-
               </select>
           </div>
           <div>
@@ -105,6 +123,7 @@ export default class AddNote extends React.Component {
             <textarea
               name='content'
               id='content'
+              required
             />
           </div>
               <div className='add-note-buttons'>
@@ -115,6 +134,7 @@ export default class AddNote extends React.Component {
                 <button type='submit'>
                   Save
                 </button>
+                {this.state.message}
               </div>
             </form>
           </section>

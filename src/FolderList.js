@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
-import PropTypes from 'prop-types';
 
 export default function FolderList() {
     const context = useContext(NotefulContext)
@@ -24,7 +23,3 @@ export default function FolderList() {
         </div>
     )
 }
-
-FolderList.propTypes = {
-    folder: PropTypes.arrayOf(PropTypes.object)
-};

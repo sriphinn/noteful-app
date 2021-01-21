@@ -9,11 +9,16 @@ const Required = () => (
 export default class AddFolder extends React.Component {
 
     static contextType = NotefulContext; 
+
+    state = {
+      error: null,
+    };
     
     handleSubmit = e => {
         e.preventDefault()
         const {name} = e.target
         const folder = {
+            id: name.value,
             name: name.value
         }
         fetch(`http://localhost:9090/folders`, {
@@ -26,12 +31,16 @@ export default class AddFolder extends React.Component {
         .then((e) => {
             this.context.getData()
             this.props.history.push('/')
-        }) 
+        })
+        .catch(error => {
+          this.setState({ error })
+        })
     }
+    
 
     handleClickCancel = () => {
         this.props.history.push('/')
-      };
+    };
     
     render() {
         return (
@@ -71,8 +80,9 @@ export default class AddFolder extends React.Component {
             </form>
           </section>
         );
-    }    
-}
+    }
+}  
+
 
 AddFolder.propTypes = {
   history: propTypes.any.isRequired

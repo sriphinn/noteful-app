@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
-import moment from 'moment';
 import PropTypes from 'prop-types';
+import NoteItem from './NoteItem.js';
 
 export default function NoteList(props) {
     const context = useContext(NotefulContext)
@@ -19,14 +19,7 @@ export default function NoteList(props) {
         <div>
             <h2>Note List</h2>
             <ul className="note-list">
-                {data.map(note =>
-                    <li key={note.id} className='note'>
-                        <Link to={`/note/${note.id}`}>
-                            <h3>{note.name}</h3>
-                        </Link>
-                        <p>Date modified: {moment(note.modified).format("MMM DD YYYY")}</p>
-                        <button onClick={(e)=>context.deleteNote(note.id)}>Delete Note</button>
-                    </li>)}
+                {data.map(note => <NoteItem note={note}/>)}
                     <Link to={"/add-note"}>
                         <button className="add-note">
                             Add note
@@ -38,7 +31,6 @@ export default function NoteList(props) {
 }
 
 NoteList.propTypes = {
-    folder: PropTypes.arrayOf(PropTypes.object),
-    notes: PropTypes.arrayOf(PropTypes.object)
+    match: PropTypes.any.isRequired,
 };
 

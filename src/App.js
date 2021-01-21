@@ -13,6 +13,7 @@ export default class App extends React.Component {
   state = {
     folders: [],
     notes: [],
+    error: null
   };
 
   setFolders = folders => {
@@ -55,8 +56,10 @@ export default class App extends React.Component {
         }
         return res.json()
       })
+      .catch(error => {
+        this.setState({ error })
+      })
       .then(this.setNotes)
-      .catch(error => this.setState({ error }))
   }
 
   deleteNote = (id) => {
@@ -101,7 +104,12 @@ export default class App extends React.Component {
             <section className='note-list-container'>
               <Route exact path="/" component={NoteList} />
               <Route path="/folder/:folderId" component={NoteList} />
-              <Route path="/note/:noteId" component={Note} />
+              <Route 
+                path="/note/:noteId" 
+                render={(props) => (
+                  <Note {...props} notes={this.state.notes} />
+                )}
+              />
               <Route path="/add-note" component={AddNote} />
             </section>
           </main>

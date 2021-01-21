@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
 import NotefulContext from './NotefulContext';
 import moment from 'moment';
+import PropTypes from 'prop-types';
 
 export default function Note(props) {
     
     const context = useContext(NotefulContext)
-    const note = context.notes.find(n =>
+
+    const note = props.notes.find(n =>
         n.id === props.match.params.noteId
     ) || {}
     console.log(props.match.params.noteId)
@@ -26,3 +28,8 @@ export default function Note(props) {
         </div>
     )
 }
+
+Note.propTypes = {
+    notes: PropTypes.arrayOf(PropTypes.object),
+    history: PropTypes.any.isRequired
+};
