@@ -8,11 +8,11 @@ export default function NoteSidebar(props) {
     const context = useContext(NotefulContext);
 
     const note = context.notes.find(n =>
-        n.id === props.match.params.noteId
+        n.id === parseInt(props.match.params.noteId)
     )
 
     const folderName = context.folders.find(f =>
-        f.id === note.folderId
+        f.id === note.folder_id
     )
 
     console.log('folderName', folderName)

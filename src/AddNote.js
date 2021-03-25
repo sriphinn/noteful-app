@@ -37,7 +37,7 @@ export default class AddNote extends React.Component {
 
   handleNoteSubmit = e => {
     e.preventDefault()
-    const {name, folderId, content} = e.target
+    const {name, folder_id, content} = e.target
     const validName = this.validateName(name.value);
       if (!validName){
         return
@@ -48,11 +48,11 @@ export default class AddNote extends React.Component {
     }
     const note = {
       name: validName,
-      folderId: folderId.value,
-      content: validContent.value,
+      folder_id: folder_id.value,
+      content: validContent,
       modified: new Date()
     }
-    fetch(`http://localhost:9090/notes`, {
+    fetch(`http://localhost:8000/api/notes`, {
       method: 'POST',
       body: JSON.stringify(note),
       headers: {
@@ -108,7 +108,7 @@ export default class AddNote extends React.Component {
               {' '}
               <Required />
             </label>
-              <select name="folderId" id="folderId">
+              <select name="folder_id" id="folder_id">
                 {this.context.folders.map(folder =>
                     <option key={folder.id} value={folder.id}>
                       {folder.name}

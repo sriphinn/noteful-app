@@ -21,7 +21,7 @@ export default class AddFolder extends React.Component {
             id: name.value,
             name: name.value
         }
-        fetch(`http://localhost:9090/folders`, {
+        fetch(`http://localhost:8000/api/folders`, {
             method: 'POST',
             body: JSON.stringify(folder),
             headers: {

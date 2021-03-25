@@ -8,11 +8,11 @@ export default function NoteList(props) {
     const context = useContext(NotefulContext)
 
     let data;
-    if (!props.match.params.folderId) {
+    if (!props.match.params.folder_id) {
         data = context.notes
     } else {
         data = context.notes.filter(note =>
-            note.folderId === props.match.params.folderId)
+            note.folder_id === parseInt(props.match.params.folder_id))
     }
 
     return (

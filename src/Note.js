@@ -8,7 +8,7 @@ export default function Note(props) {
     const context = useContext(NotefulContext)
 
     const note = props.notes.find(n =>
-        n.id === props.match.params.noteId
+        n.id === parseInt(props.match.params.noteId)
     ) || {}
     console.log(props.match.params.noteId)
     

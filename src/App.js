@@ -35,7 +35,7 @@ export default class App extends React.Component {
   }
 
   getData = () => {
-    fetch(`http://localhost:9090/folders`, {
+    fetch(`http://localhost:8000/api/folders`, {
       method: 'GET'
     })
       .then(res => {
@@ -47,7 +47,7 @@ export default class App extends React.Component {
       .then(this.setFolders)
       .catch(error => this.setState({ error }))
 
-    fetch(`http://localhost:9090/notes`, {
+    fetch(`http://localhost:8000/api/notes`, {
       method: 'GET'
     })
       .then(res => {
@@ -63,7 +63,7 @@ export default class App extends React.Component {
   }
 
   deleteNote = (id) => {
-    fetch(`http://localhost:9090/notes/${id}`, {
+    fetch(`http://localhost:8000/api/notes/${id}`, {
       method: 'DELETE'
     })
       .then(data => {
@@ -97,13 +97,13 @@ export default class App extends React.Component {
           <main>
             <aside className='folder-list-container'>
               <Route exact path="/" component={FolderList} />
-              <Route path="/folder/:folderId" component={FolderList} />
+              <Route path="/folder/:folder_id" component={FolderList} />
               <Route path="/note/:noteId" component={NoteSidebar} />
               <Route path="/add-folder" component={AddFolder} />
             </aside>
             <section className='note-list-container'>
               <Route exact path="/" component={NoteList} />
-              <Route path="/folder/:folderId" component={NoteList} />
+              <Route path="/folder/:folder_id" component={NoteList} />
               <Route 
                 path="/note/:noteId" 
                 render={(props) => (
