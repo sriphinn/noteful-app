@@ -1,6 +1,9 @@
 import React from 'react';
 import NotefulContext from './NotefulContext';
 import propTypes from 'prop-types';
+import config from './config';
+
+const { API_ENDPOINT } = config;
 
 const Required = () => (
     <span className='add-note-required'>*</span>
@@ -52,7 +55,7 @@ export default class AddNote extends React.Component {
       content: validContent,
       modified: new Date()
     }
-    fetch(`http://localhost:8000/api/notes`, {
+    fetch(`${API_ENDPOINT}/api/notes`, {
       method: 'POST',
       body: JSON.stringify(note),
       headers: {

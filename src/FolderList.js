@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from './NotefulContext';
 
+
 export default function FolderList() {
     const context = useContext(NotefulContext)
     return (

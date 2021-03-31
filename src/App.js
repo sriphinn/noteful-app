@@ -7,7 +7,10 @@ import Note from './Note';
 import NoteSidebar from './NoteSidebar';
 import NotefulContext from './NotefulContext';
 import AddFolder from './AddFolder';
-import AddNote from './AddNote'
+import AddNote from './AddNote';
+import config from './config';
+
+const { API_ENDPOINT } = config;
 
 export default class App extends React.Component {
   state = {
@@ -35,7 +38,7 @@ export default class App extends React.Component {
   }
 
   getData = () => {
-    fetch(`http://localhost:8000/api/folders`, {
+    fetch(`${API_ENDPOINT}/api/folders`, {
       method: 'GET'
     })
       .then(res => {
@@ -47,7 +50,7 @@ export default class App extends React.Component {
       .then(this.setFolders)
       .catch(error => this.setState({ error }))
 
-    fetch(`http://localhost:8000/api/notes`, {
+    fetch(`${API_ENDPOINT}/api/notes`, {
       method: 'GET'
     })
       .then(res => {
@@ -63,7 +66,7 @@ export default class App extends React.Component {
   }
 
   deleteNote = (id) => {
-    fetch(`http://localhost:8000/api/notes/${id}`, {
+    fetch(`${API_ENDPOINT}/api/notes/${id}`, {
       method: 'DELETE'
     })
       .then(data => {
@@ -81,10 +84,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log('render')
     const contextValue = {
-      folders: this.state.folders,
-      notes: this.state.notes,
+      folders: this.state.folders || [],
+      notes: this.state.notes || [],
       deleteNote: this.deleteNote,
       getData: this.getData
     }

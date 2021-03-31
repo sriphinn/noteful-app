@@ -1,6 +1,9 @@
 import React from 'react';
 import NotefulContext from './NotefulContext';
 import propTypes from 'prop-types';
+import config from './config';
+
+const { API_ENDPOINT } = config;
 
 const Required = () => (
     <span className='AddBookmark__required'>*</span>
@@ -21,7 +24,7 @@ export default class AddFolder extends React.Component {
             id: name.value,
             name: name.value
         }
-        fetch(`http://localhost:8000/api/folders`, {
+        fetch(`${API_ENDPOINT}/api/folders`, {
             method: 'POST',
             body: JSON.stringify(folder),
             headers: {
